@@ -1,26 +1,27 @@
 # URL: https://codeforces.com/problemset/problem/492/B
 
-# In python, the input() function always return a string. If the user enters a sequence `0 1 2 3`, the `input()` function will return a string `"0 1 2 3"`. Each spaces the user entered will be captured and included in the string.
-# So, it's time to make use of the function `split()` to separate the numbers by spaces.
+# In Python, the input() function always returns a string. For example, entering `0 1 2 3` will result in the string "0 1 2 3". All spaces entered by the user will be captured in the string.
+# Therefore, we use the `split()` function to separate the numbers by spaces.
+
 firstLine = input().split()
 numOfLanterns = int(firstLine[0])  # The number of lanterns given
 length = int(firstLine[1])  # The length of the street
-# The positions of the lanterns
-# See this line of code, it transfers every substring which contains a single number under this condition. Notice that a pair of square brackets covers the loop progress of transfering strings into integers. It is called "list comprehension," it is a neat way to create a list.
-# Here is an equilavent expression of the progress:
+
+# Capturing the positions of the lanterns
+# The following line of code converts each substring into an integer. Observe the square brackets, which denote a "list comprehension" - a concise way to create a list in Python.
+# Here's an equivalent breakdown of the process:
 # lanternPositions = []
 # user_input = input().split()
 # for i in user_input:
 #     lanternPositions.append(int(i))
-
 lanternPositions = sorted([int(i) for i in input().split()])
-# This function separate the numbers in the string by spaces and make them substrings in a list.
-# After that, the string are gonna be like `"'0', '1', '2', '3'"`. Notice that the numbers in this list are still strings. So it's better to transfer them in to integer type.
-# This function finds out the largest difference between two adjacent numbers of an array
+# This function separates the numbers in the string by spaces, producing a list of substrings.
+# After this, the list will look like ['0', '1', '2', '3']. Notice the numbers are still strings, so we should convert them to integers.
+# The function then determines the largest gap between two adjacent numbers in the array.
 
 
+# This represents the maximum gap between two adjacent lanterns.
 def MaxLanternDistance(n, lanternPositions):
-    # this is the maximum difference bewteen two adjacent lanterns.
     maxDiff = 0
     for i in range(n-1):
         diff = lanternPositions[i+1]-lanternPositions[i]
@@ -28,5 +29,6 @@ def MaxLanternDistance(n, lanternPositions):
     return maxDiff
 
 
-# Now consider the distances from the first lantern to the start of the street and from the last lantern to the end of the street.
-print(max(lanternPositions[0], length-lanternPositions[numOfLanterns-1], MaxLanternDistance(numOfLanterns, lanternPositions)/2))
+# We also need to consider the distances from the first lantern to the street's start and from the last lantern to its end.
+print(max(lanternPositions[0], length-lanternPositions[numOfLanterns-1],
+      MaxLanternDistance(numOfLanterns, lanternPositions)/2))
